@@ -28,7 +28,7 @@
                     Carrito De Compras
                 </button>
             </div> 
-            
+        </form>    
          <!-- Button trigger modal -->
         
         
@@ -37,20 +37,53 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Lista De Tus Compras</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tus Productos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    @if(count($items)==0)
+                        <h2>Aún No agregas Productos a tu Factura</h2>
+                    @else
+                        @foreach($items as $p)
+                            <a href="{{route('eliminarItem', ['pro'=>$p->productos->Idproducto, 'fac'=>$aux])}}" class="close" >&#10060;</a>
+                            <img src='{{url("/imagenes/$p->productos->fotopro")}}' height="300" width="300" class="card-img-top" alt="...">
+                            <h6 class="card-text">Producto: <b> {{$p->productos->Nombrepro}}</b></h6>
+                            <h6 class="card-text">Referencia: <b> {{$p->productos->Idproducto}}</b></h6>
+                            <div class="alert alert-danger" role="alert">
+                                <h6 class="card-text">Precio: <b>${{$p->Precioitem}}</b> </h6>
+                            </div>
+                            <h6 class="card-text">Subtotal: <b>{{$p->Totalitem}}</b> </h6>
+                            <h6 class="card-text">Stock: <b>{{$p->productos->Cantidadpro}}</b> </h6>
+                            <form action="{{route('agregaritem')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="lado" value="2">
+                                <input type="hidden" name="car" value="{{$car}}">
+                                <input type="hidden" name="fac" value="{{$aux}}">
+                                <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="fecha" value='<?php echo date("Y-m-d");?>'>
+                                <input type="hidden" name="producto" value="{{$p->productos->Idproducto}}">
+                                <input type="hidden" name="precio" value="{{$p->productos->Preciopro}}">
+                                <div class="quantity">
+                                    <input type="number" min="1" max="{{$p->Cantidaditem+$p->productos->Cantidadpro}}" name="cantidad" step="1" value="{{$p->Cantidaditem}}" required>
+                                    
+                                </div>
+                                <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
+                            </form>   
+                            
+                            <h6>===========================================</h6>
+                        @endforeach
+                        <h5 class="card-text">Total: <b>{{$factura->Totalfacven}}</b> </h5>
+                    @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-success">Finalizar</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Seguir Comprando</button>
+                    <a href="{{route('pagar', ['pro'=>$p->productos->Idproducto, 'fac'=>$aux])}}"  class="btn btn-outline-success" >Finalizar Compra</a>
+                    
                 </div>
             </div>
             </div>
         </div>
-        </form>
+        
     </div>
 
     <div class="container">
@@ -104,27 +137,17 @@
                                     <div class="modal-footer">
                                         <button type="button" style="margin-right: auto;" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                         
-                                            @if($cont <= 0)
-                                                @php
-                                                    $aux=1;
-                                                @endphp
-                                            @else
-                                                
-                                                @php
-                                                    $aux=$cont+1;
-                                                @endphp
-                                               
-                                            @endif
                                         <form action="{{route('agregaritem')}}" method="POST">
                                             @csrf
-                                            <input type="text" name="fac" value="{{$aux}}">
-                                            <input type="text" name="usuario" value="{{ Auth::user()->id }}">
-                                            <input type="text" name="fecha" value='<?php echo date("Y-m-d");?>'>
-                                            <input type="text" name="producto" value="{{$p->Idproducto}}">
-                                            <input type="text" name="precio" value="{{$p->Preciopro}}">
+                                            <input type="hidden" name="lado" value="1">
+                                            <input type="hidden" name="car" value="{{$car}}">
+                                            <input type="hidden" name="fac" value="{{$aux}}">
+                                            <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
+                                            <input type="hidden" name="fecha" value='<?php echo date("Y-m-d");?>'>
+                                            <input type="hidden" name="producto" value="{{$p->Idproducto}}">
+                                            <input type="hidden" name="precio" value="{{$p->Preciopro}}">
                                             <div class="quantity">
-                                                <input type="number" min="1" max="{{$p->Cantidadpro}}" name="cantidad" step="1" value="1" required>
-                                                
+                                                <input type="number" min="1" max="{{$p->Cantidadpro}}" style="margin-left: -100px;" name="cantidad" step="1" value="1" required>
                                             </div>
                                             <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
                                         </form>                                        

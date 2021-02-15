@@ -41,3 +41,19 @@ function funcNuevoAlineamiento(){
     );
 	//.append("<tr><td>123</td><td>456</td></tr>");
 }
+
+
+
+//==================================================================================================Migraciones
+php artisan migrate --path=database\migrations\2021_01_18_194427_create_tipo_table.php 
+php artisan migrate --path=database\migrations\2021_02_10_134743_create_estados_table.php
+php artisan migrate --path=database\migrations\2014_10_12_000000_create_users_table.php
+php artisan migrate --path=database\migrations\2021_01_16_185743_create_categoria_table.php
+php artisan migrate --path=database\migrations\2021_02_10_185845_create_marcas_table.php
+php artisan migrate --path=database\migrations\2021_01_16_183651_create_producto_table.php
+php artisan migrate --path=database\migrations\2021_01_16_213624_create_proveedor_table.php
+php artisan migrate --path=database\migrations\2021_01_16_212931_create_factura_table.php
+php artisan migrate --path=database\migrations\2021_01_16_211524_create_item_table.php
+php artisan migrate --path=database\migrations\2021_01_18_165814_create_factura_venta_table.php
+php artisan migrate --path=database\migrations\2021_01_18_170143_create_item_factura_venta_table.php
+//============================================================================================================

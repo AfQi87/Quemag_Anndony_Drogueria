@@ -4,7 +4,7 @@
     <h1 class="text-center">Formulario de registro Categoria</h1>
 
     <div class="container"> 
-    <form action="{{url('producto/formcategoria')}}" method="POST" >
+    <form action="{{url('categoria/formcategoria')}}" method="POST" >
         @csrf
         <br>
         

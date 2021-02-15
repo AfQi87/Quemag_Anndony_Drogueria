@@ -9,6 +9,7 @@ class ItemVenta extends Model
 {
     use HasFactory;
     protected $table='item_factura_venta';
+    protected $primaryKey = 'Idfacven';
     public function facturasven(){
         return $this->belongsTo(FacturaVenta::class,'Idfacven','Idfacven');
     }

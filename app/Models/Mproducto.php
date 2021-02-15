@@ -28,4 +28,8 @@ class Mproducto extends Model
     public function items(){
         return $this->hasMany(Mitem::class,'Idproducto');
     }
+
+    public function itemsventa(){
+        return $this->hasMany(ItemVenta::class,'Idproducto');
+    }
 }

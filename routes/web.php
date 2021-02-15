@@ -130,3 +130,9 @@ Route::get('cliente/listar/{Idcategoria}', [ClientesController::class, 'listar']
 Route::POST('cliente/buscar',[ClientesController::class, 'buscar'])->middleware('auth');
 
 Route::POST('cliente/item',[ClientesController::class, 'agregar'])->middleware('auth')->name('agregaritem');
+
+Route::get('cliente/eliminar/{pro}/{fac}', [ClientesController::class, 'eliminar'])->middleware('auth')->name('eliminarItem');
+
+
+Route::get('cliente/pago/{pro}/{fac}', [ClientesController::class, 'pagar'])->middleware('auth')->name('pagar');
+
