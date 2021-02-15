@@ -9,7 +9,7 @@ class FacturaVenta extends Model
 {
     use HasFactory;
     protected $table='factura_venta';
-    
+    protected $primaryKey = 'Idfacven';
     public function estados(){
         return $this->belongsTo(Estado::class,'estadofacv','idestado');
     }

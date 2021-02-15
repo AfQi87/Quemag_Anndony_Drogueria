@@ -25,7 +25,7 @@ class CreateItemFacturaVentaTable extends Migration
 
             $table->foreign('Idpro')->references('Idproducto')->on('producto');
             $table->foreign('Idfacven')->references('Idfacven')->on('factura_venta');
-
+            $table->timestamps();
             
         });
     }

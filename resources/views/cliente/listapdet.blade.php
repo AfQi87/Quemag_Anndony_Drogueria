@@ -27,8 +27,7 @@
                         <form action="" method="POST">
                             <div class="quantity">
                                 <input type="number" min="1" max="{{$productos->Cantidadpro}}" step="1" value="1" required>
-                                <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
-                        
+                                <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;" onclick="return alerta()">Agregar Al Carrito</button>
                             </div>
                         </form>
 

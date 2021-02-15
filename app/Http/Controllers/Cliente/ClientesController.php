@@ -12,7 +12,7 @@ use App\Models\Mcategoria;
 use App\Models\Estado;
 use App\Models\Marca;
 use App\Models\FacturaVenta;
-use App\Models\itemVenta;
+use App\Models\ItemVenta;
 
 class ClientesController extends Controller
 {
@@ -21,7 +21,8 @@ class ClientesController extends Controller
         $productos = Mproducto::all();
         $categorias=Mcategoria::all();
         $facturas = FacturaVenta::all();
-        return view('cliente.listap', compact('productos', 'categorias', 'facturas'));
+        $cont=count($facturas);
+        return view('cliente.listap', compact('productos', 'categorias', 'cont'));
         
     }
     public function detalle(Request $request, $Idproducto){    
@@ -39,8 +40,8 @@ class ClientesController extends Controller
         $productos = Mproducto::where('Nombrepro', 'like','%'.$nombre.'%')
         ->get(); 
         $categorias=Mcategoria::all();
-        $facturas = FacturaVenta::all();
-        return view('cliente.listap', compact('productos', 'categorias', 'facturas'));
+        $cont=count($facturas);
+        return view('cliente.listap', compact('productos', 'categorias', 'cont'));
             
     }
     public function agregar(Request $request){
@@ -48,8 +49,8 @@ class ClientesController extends Controller
         $facturaven->Idfacven  = $request->input('fac');
         $facturaven->Idpersona = $request->input('usuario');
         $facturaven->Fechafacven = $request->input('fecha');
-        $facturaven->Totalfac = 0.0;
-        $facturaven->estadofac = 1;
+        $facturaven->Totalfacven = 0.0;
+        $facturaven->estadofacv = 1;
         $facturaven->save();
 
         $facturaven = FacturaVenta::findOrFail($request->input('fac'));
