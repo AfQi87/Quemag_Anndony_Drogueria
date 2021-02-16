@@ -9,10 +9,15 @@ class Mitem extends Model
 {
     use HasFactory;
     protected $table='item';
+    protected $primaryKey = 'Idfac';
+    
     public function estados(){
         return $this->belongsTo(Mfactura::class,'Idfac','Idfactura');
     }
     public function productos(){
         return $this->belongsTo(Mproducto::class,'Idpro','Idproducto');
+    }
+    public function facturas(){
+        return $this->belongsTo(Mfactura::class,'Idfac','Idfactura');
     }
 }

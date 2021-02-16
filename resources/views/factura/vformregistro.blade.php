@@ -5,6 +5,13 @@
     <h1 class="text-center">Formulario de registro Factura</h1>
 
     <div class="container">
+        @if($aux == 1)
+            <?php 
+                echo "<script>
+                    alert('El Id Ingresado Ya Existe');
+                </script>";
+            ?>
+        @endif 
         <form action="{{url('factura/registro')}}" method="POST" >
             @csrf
             <br>

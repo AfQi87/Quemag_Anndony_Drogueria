@@ -17,27 +17,35 @@ use Illuminate\Support\Facades\Hash;
 class UsuarioControlle extends Controller
 {
     public function formusuario(){
+        $aux=0;
         $tipos = Mtipo::all();
-        return view('usuario.vformregistro', compact('tipos'));
+        return view('usuario.vformregistro', compact('tipos', 'aux'));
     }
     public function registro(Request $request){
-        $request->validate([
-            'id' => 'required|string|min:8|unique:users',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:4',
-        ]);
 
-        $usuarios = new User();
-        $usuarios->id = $request->input('id');
-        $usuarios->name = $request->input('name');
-        $usuarios->email = $request->input('email');
-        $usuarios->tipopro = $request->input('tipopro');
-        $usuarios->estadoUser = 1;
-        $usuarios->password = Hash::make($request->password);
-        $usuarios->save();
-
-        return redirect('usuario/lista');
+        $user = User::all();
+        $cont=0;
+        foreach($user as $u){
+            if($u->id == $request->input('id') || $u->email == $request->input('email')){
+                $cont++;
+            }
+        }
+        if($cont >0){
+            $aux=1;
+            $tipos = Mtipo::all();
+            return view('usuario.vformregistro', compact('tipos', 'aux'));
+        }else{
+            $usuarios = new User();
+            $usuarios->id = $request->input('id');
+            $usuarios->name = $request->input('name');
+            $usuarios->email = $request->input('email');
+            $usuarios->tipopro = $request->input('tipopro');
+            $usuarios->estadoUser = 1;
+            $usuarios->password = Hash::make($request->password);
+            $usuarios->save();
+            return redirect('usuario/lista');
+        }
+        
           
 
     }

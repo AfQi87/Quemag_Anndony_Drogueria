@@ -4,6 +4,13 @@
     <h1 class="text-center">Registro Usuario</h1>
 
     <div class="container">
+    @if($aux == 1)
+            <?php 
+                echo "<script>
+                    alert('Los Datos Ingresados Ya Existen');
+                </script>";
+            ?>
+    @endif 
         <form action="{{url('usuario/registro')}}" method="POST" >
             @csrf
             <br>
