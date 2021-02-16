@@ -61,8 +61,32 @@ class ClientesController extends Controller
         ->get(); 
         $categorias=Mcategoria::all();
         $facturas = FacturaVenta::all();
-        $cont=count($facturas);
-        return view('cliente.listap', compact('productos', 'categorias', 'cont'));
+        $factura =FacturaVenta::latest('Idfacven', 'desc')
+        ->first();
+        if($cont > 0){
+            if($factura->estadofacv == 2){
+                $car=1;
+            }else{
+                $car=2;
+            }
+    
+            if($car == 1){
+                $aux=$cont;
+            }else{
+                if($cont <= 0){
+                    $aux=1;
+                }else{
+                    $aux=$cont+1;
+                }
+            }
+        }else{
+            $car=0;
+            $aux=1;
+        }
+        $items = ItemVenta::where('Idfacven', 'like',  $aux)->get();
+
+
+        return view('cliente.listap', compact('productos', 'categorias', 'aux', 'car', 'items', 'factura'));
                 
     }
     public function buscar(Request $request){
@@ -72,7 +96,32 @@ class ClientesController extends Controller
         $categorias=Mcategoria::all();
         $facturas = FacturaVenta::all();
         $cont=count($facturas);
-        return view('cliente.listap', compact('productos', 'categorias', 'cont'));
+        $factura =FacturaVenta::latest('Idfacven', 'desc')
+        ->first();
+        if($cont > 0){
+            if($factura->estadofacv == 2){
+                $car=1;
+            }else{
+                $car=2;
+            }
+    
+            if($car == 1){
+                $aux=$cont;
+            }else{
+                if($cont <= 0){
+                    $aux=1;
+                }else{
+                    $aux=$cont+1;
+                }
+            }
+        }else{
+            $car=0;
+            $aux=1;
+        }
+        $items = ItemVenta::where('Idfacven', 'like',  $aux)->get();
+
+
+        return view('cliente.listap', compact('productos', 'categorias', 'aux', 'car', 'items', 'factura'));
     }
     public function agregar(Request $request){
 
@@ -149,7 +198,13 @@ class ClientesController extends Controller
 
         $facturaven->Totalfacven = $total;
         $facturaven->save();
-        return redirect('cliente/lista');
+        if($request->input('lado')==1 || $request->input('lado')==2){
+           return redirect('cliente/lista'); 
+        }else{
+            $items=ItemVenta::where('Idfacven', 'like', $request->input('fac'))->get();
+            return view('cliente/listapdet', compact('items'));
+        }
+        
     }
 
 
@@ -177,14 +232,21 @@ class ClientesController extends Controller
     }
 
     public function pagar($pro, $fac){    
-        $productos=Mproducto::findOrFail($pro);
-        
-
-        $facturas=FacturaVenta::findOrFail($fac);
-        
-        return view('cliente/listapdet');
+         
+        $items=ItemVenta::where('Idfacven', 'like', $fac)->get();
+        return view('cliente/listapdet', compact('items'));
     }
 
+    public function finalizar($fac){
+        $facttura = FacturaVenta::findOrFail($fac);
+        $facttura->estadofacv = 1;
+        $facttura->save();
+        
+        return redirect('cliente/lista');
+    }
 
-
+    public function facturalist(){
+        $facturas=FacturaVenta::where('Idpersona', 'like', Auth::user()->id)->get();
+        return view('cliente/facturalist', compact('facturas'));
+    }
 }

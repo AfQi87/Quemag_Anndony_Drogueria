@@ -17,7 +17,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           
-          <a class="dropdown-item" href="{{url('factura/lista')}}">Listar</a>
+          <a class="dropdown-item" href="{{url('cliente/factura')}}">Listar</a>
           <div class="dropdown-divider"></div>
           
         </div>

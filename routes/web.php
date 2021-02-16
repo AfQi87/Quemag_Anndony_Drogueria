@@ -136,3 +136,6 @@ Route::get('cliente/eliminar/{pro}/{fac}', [ClientesController::class, 'eliminar
 
 Route::get('cliente/pago/{pro}/{fac}', [ClientesController::class, 'pagar'])->middleware('auth')->name('pagar');
 
+Route::get('cliente/fin/{fac}', [ClientesController::class, 'finalizar'])->middleware('auth')->name('fin');
+
+Route::get('cliente/factura',[ClientesController::class, 'facturalist']);  //Lista
