@@ -81,6 +81,7 @@ class FacturaController extends Controller
     }
     public function listafactura(){    
         $facturas = Mfactura::all();
+        $facturas = Mfactura::join('item','Idfactura','like', 'Idfac')->get();
         return view('factura.vlistafactura', ['facturas' => $facturas]);
     }
     
@@ -104,11 +105,20 @@ class FacturaController extends Controller
         ->where('Idfactura', 'like', $Idfactura)->get();
         return view('factura.vlistafacturadet', compact('facturas', 'items'));
     }
-    public function eliminar($Idfactura){
-        $itemf = Mitem::findOrFail($Idfactura);
+    public function eliminar($fac, $pro){
+        $items= Mitem::where('Idfac', 'like',$fac)->get();
+        foreach($items as $i){
+            $productos = Mproducto::findOrFail($i->Idpro);
+
+            $auxx=$productos->Cantidadpro-$i->Cantidaditem;
+            $productos->Cantidadpro=$auxx;
+            $productos->save();
+        }
+        
+        $itemf = Mitem::findOrFail($fac);
         $itemf->delete();
 
-        $facttura = Mfactura::findOrFail($Idfactura);
+        $facttura = Mfactura::findOrFail($fac);
         $facttura->delete();
         return redirect('factura/lista');
     }

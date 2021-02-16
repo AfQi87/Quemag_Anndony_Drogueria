@@ -23,7 +23,8 @@
             
             <td> {{$p->proveedores->Nombreprove}}</td>
             <td> {{$p->Fechafac}}</td>
-            <td> {{$p->Totalfac}}</td>
+            <td> {{$p->Idpro}}</td>
+            
             <td> {{$p->estados->descripcionestado}}</td>     
             <td style="width: 130px;"> 
                 
@@ -32,7 +33,7 @@
                 @if($p->estadofac == 2)
                     <a href="{{route('activarFactura', $p->Idfactura)}}"  class="btn btn-warning" onclick="return activar()">&#10004;</a>
                 @else
-                    <a href="{{route('eliminarFac', $p->Idfactura)}}"  class="btn btn-danger" onclick="return desactivar()">&#10060;</a>
+                    <a href="{{route('eliminarFac', ['fac'=>$p->Idfactura, 'pro'=>$p->Idpro])}}"  class="btn btn-danger" onclick="return eliminar()">&#10060;</a>
                 @endif
             </td>
             </tr>

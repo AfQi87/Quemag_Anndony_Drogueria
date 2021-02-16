@@ -147,7 +147,13 @@ function alerta(){
     }
 
 }
-
+function eliminar(){
+    if(confirm("Confirme Para Eliminar Factura")){
+        return true;
+    }else{
+        return false;
+    }
+}
 function activar(){
     if(confirm("Confirme Para Activar")){
         return true;

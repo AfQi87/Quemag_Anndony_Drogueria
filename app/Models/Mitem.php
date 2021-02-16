@@ -17,7 +17,7 @@ class Mitem extends Model
     public function productos(){
         return $this->belongsTo(Mproducto::class,'Idpro','Idproducto');
     }
-    public function facturas(){
+    public function factura(){
         return $this->belongsTo(Mfactura::class,'Idfac','Idfactura');
     }
 }

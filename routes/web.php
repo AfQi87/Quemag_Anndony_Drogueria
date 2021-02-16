@@ -114,7 +114,7 @@ Route::POST('factura/buscar',[FacturaController::class, 'buscar'])->middleware('
 Route::get('factura/actualizar/{Idfactura}', [FacturaController::class, 'formactualizar'])->name('actualizarFac')->middleware('auth')->middleware(['admin']);
 Route::post('factura/actualizar/{Idfactura}', [FacturaController::class, 'actualizar'])->name('actualizarFactura')->middleware('auth')->middleware(['admin']);
 
-Route::get('factura/eliminar/{Idfactura}', [FacturaController::class, 'eliminar'])->middleware('auth')->name('eliminarFac')->middleware(['admin']);
+Route::get('factura/eliminar/{fac}/{pro}', [FacturaController::class, 'eliminar'])->middleware('auth')->name('eliminarFac')->middleware(['admin']);
 Route::get('factura/activar/{Idfactura}', [FacturaController::class, 'activar'])->middleware('auth')->name('activarFactura')->middleware(['admin']);
 
 Route::get('factura/detalle/{Idfactura}', [FacturaController::class, 'facdetalle'])->middleware('auth')->name('facdetalle')->middleware(['admin']);

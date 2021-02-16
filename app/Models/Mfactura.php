@@ -17,7 +17,7 @@ class Mfactura extends Model
         return $this->belongsTo(Mproveedor::class,'Idprove','idproveedor');
     }
 
-    public function items(){
+    public function item(){
         return $this->hasMany(Mitem::class,'Idfactura');
     }
 }
