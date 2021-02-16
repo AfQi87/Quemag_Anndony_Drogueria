@@ -61,8 +61,10 @@ class ClientesController extends Controller
         ->get(); 
         $categorias=Mcategoria::all();
         $facturas = FacturaVenta::all();
+        $cont=count($facturas);
         $factura =FacturaVenta::latest('Idfacven', 'desc')
         ->first();
+
         if($cont > 0){
             if($factura->estadofacv == 2){
                 $car=1;
@@ -247,6 +249,14 @@ class ClientesController extends Controller
 
     public function facturalist(){
         $facturas=FacturaVenta::where('Idpersona', 'like', Auth::user()->id)->get();
+
+        
         return view('cliente/facturalist', compact('facturas'));
+    }
+    public function facdetalle($Idfacven){
+        $facturas=FacturaVenta::where('Idfacven', 'like', $Idfacven)->first();
+
+        $items = ItemVenta::where('Idfacven', 'like', $Idfacven)->get();
+        return view('cliente/facturalistdet', compact('facturas', 'items'));    
     }
 }

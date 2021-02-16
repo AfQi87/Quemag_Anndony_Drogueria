@@ -51,9 +51,6 @@
         </div>
     </div>
     <br><br>
-    <div class="container">
-        <h2>Ofertas--------------------------------------------</h2>
-    </div>
     
 
 @stop

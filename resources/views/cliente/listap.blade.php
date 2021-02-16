@@ -65,7 +65,9 @@
                                 <input type="hidden" name="lado" value="2">
                                 <input type="hidden" name="car" value="{{$car}}">
                                 <input type="hidden" name="fac" value="{{$aux}}">
+
                                 <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
+
                                 <input type="hidden" name="fecha" value='<?php echo date("Y-m-d");?>'>
                                 <input type="hidden" name="producto" value="{{$p->productos->Idproducto}}">
                                 <input type="hidden" name="precio" value="{{$p->productos->Preciopro}}">
@@ -100,77 +102,81 @@
             @php
                 $i=0;
             @endphp
+            @if(count($productos) >0)
+                @foreach($productos as $p)
+                @if($p->estadopro == 1)
+                <div class="col-md-4" style="margin-bottom: 20px;">
+                    <div class="card" style="width: 18rem;">
+                        <img src='{{url("/imagenes/$p->fotopro")}}' height="300" width="300" class="card-img-top" alt="...">
 
-            @foreach($productos as $p)
-            <div class="col-md-4" style="margin-bottom: 20px;">
-                <div class="card" style="width: 18rem;">
-                    <img src='{{url("/imagenes/$p->fotopro")}}' height="300" width="300" class="card-img-top" alt="...">
-
-                    <div class="card-body">
-                        <h2>{{$p->Nombrepro}}</h2>
-                        <div class="alert alert-danger" role="alert">
-                            <p class="card-text">Precio: ${{$p->Preciopro}}</p>
+                        <div class="card-body">
+                            <h2>{{$p->Nombrepro}}</h2>
+                            <div class="alert alert-danger" role="alert">
+                                <p class="card-text">Precio: ${{$p->Preciopro}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer bg-transparent" style="height: 70px;">
-                        <a href="#{{$i}}" class="btn btn-outline-success">Comprar</a>
-                    
-                        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#a{{$i}}">
-                            Detalle
-                        </button>
+                        <div class="card-footer bg-transparent" style="height: 70px;">
+                            <a href="#{{$i}}" class="btn btn-outline-success">Comprar</a>
                         
-                        <!-- Modal -->
-                        <div class="modal fade" id="a{{$i}}" style="max-height: 1000px;overflow-y: scroll;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Detalle Producto</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src='{{url("/imagenes/$p->fotopro")}}' width="300" height="400" class="card-img-top" alt="No Se Encuentra La Imagen">
-                                        <h3 class="card-title">{{$p->Nombrepro}}</h3>
-                                        <h6 class="card-text">Referencia: <b> {{$p->Idproducto}}</b></h6>
-                                        <div class="alert alert-danger" role="alert">
-                                            <h6 class="card-text">Precio: <b>${{$p->Preciopro}}</b> </h6>
+                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#a{{$i}}">
+                                Detalle
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="a{{$i}}" style="max-height: 1000px;overflow-y: scroll;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Detalle Producto</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <h6 class="card-text">Categoria: <b>{{$p->categorias->nombrecat}}</b> </h6>
-                                        <h6 class="card-text">Marca: <b>{{$p->marcas->descripcionmarca}}</b><h6>
-                                        <h6 class="card-text">Stock: <b>{{$p->Cantidadpro}}</b></h6>
-                                        <h6 class="card-text"> Descripción: <br><br>
-                                            <b>{{$p->Descripcionpro}}</b></h6>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" style="margin-right: auto;" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        
-                                        <form action="{{route('agregaritem')}}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="lado" value="1">
-                                            <input type="hidden" name="car" value="{{$car}}">
-                                            <input type="hidden" name="fac" value="{{$aux}}">
-                                            <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
-                                            <input type="hidden" name="fecha" value='<?php echo date("Y-m-d");?>'>
-                                            <input type="hidden" name="producto" value="{{$p->Idproducto}}">
-                                            <input type="hidden" name="precio" value="{{$p->Preciopro}}">
-                                            <div class="quantity">
-                                                <input type="number" min="1" max="{{$p->Cantidadpro}}" style="margin-left: -100px;" name="cantidad" step="1" value="1" required>
+                                        <div class="modal-body">
+                                            <img src='{{url("/imagenes/$p->fotopro")}}' width="300" height="400" class="card-img-top" alt="No Se Encuentra La Imagen">
+                                            <h3 class="card-title">{{$p->Nombrepro}}</h3>
+                                            <h6 class="card-text">Referencia: <b> {{$p->Idproducto}}</b></h6>
+                                            <div class="alert alert-danger" role="alert">
+                                                <h6 class="card-text">Precio: <b>${{$p->Preciopro}}</b> </h6>
                                             </div>
-                                            <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
-                                        </form>                                        
+                                            <h6 class="card-text">Categoria: <b>{{$p->categorias->nombrecat}}</b> </h6>
+                                            <h6 class="card-text">Marca: <b>{{$p->marcas->descripcionmarca}}</b><h6>
+                                            <h6 class="card-text">Stock: <b>{{$p->Cantidadpro}}</b></h6>
+                                            <h6 class="card-text"> Descripción: <br><br>
+                                                <b>{{$p->Descripcionpro}}</b></h6>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" style="margin-right: auto;" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            
+                                            <form action="{{route('agregaritem')}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="lado" value="1">
+                                                <input type="hidden" name="car" value="{{$car}}">
+                                                <input type="hidden" name="fac" value="{{$aux}}">
+                                                <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
+                                                <input type="hidden" name="fecha" value='<?php echo date("Y-m-d");?>'>
+                                                <input type="hidden" name="producto" value="{{$p->Idproducto}}">
+                                                <input type="hidden" name="precio" value="{{$p->Preciopro}}">
+                                                <div class="quantity">
+                                                    <input type="number" min="1" max="{{$p->Cantidadpro}}" style="margin-left: -100px;" name="cantidad" step="1" value="1" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
+                                            </form>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div> 
+                        </div> 
+                    </div>
                 </div>
-            </div>
-            @php
-                $i++;
-            @endphp
+                @endif
+                @php
+                    $i++;
+                @endphp
 
-            @endforeach
-            
+                @endforeach
+            @else
+                <h2>No Existen Productos</h2>
+            @endif
         </div>
     </div>
     <!-- Button trigger modal -->

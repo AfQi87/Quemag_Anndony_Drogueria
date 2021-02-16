@@ -22,7 +22,7 @@ class UsuarioControlle extends Controller
     }
     public function registro(Request $request){
         $request->validate([
-            'id' => 'required|string|min:4',
+            'id' => 'required|string|min:8|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:4',

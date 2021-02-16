@@ -4,8 +4,10 @@
     <h1 class="text-center">Formulario de registro Proveedor</h1>
 
     <div class="container">
+    @if($aux==0)
         <form action="{{url('proveedor/registro')}}" method="POST" >
             @csrf
+           
             <br>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -32,7 +34,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
-                <input type="email" class="form-control" name="correoprove" placeholder="Coreo Del Proveedor" aria-label="Username" aria-describedby="basic-addon1" required>
+                <input type="email" class="form-control" name="correoprove" placeholder="Correo Del Proveedor" aria-label="Username" aria-describedby="basic-addon1" required>
             </div>  
             <br>
             <div class="input-group mb-3">
@@ -50,5 +52,27 @@
             <br><br>
 
         </form>
+    @else
+        <h1>EL Proveedor Ya Existe</h1>
+        <br>
+        <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ERROR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Datos Ya Registrados</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        <a href="{{url('proveedor/formregistro')}}"  class="btn btn-info" >Aceptar</a>
+    @endif
+        
     </div>
 @stop

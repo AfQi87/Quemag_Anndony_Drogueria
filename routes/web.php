@@ -120,14 +120,14 @@ Route::get('factura/detalle/{Idfactura}', [FacturaController::class, 'facdetalle
 
 ///===================================Clientes
 
-Route::get('cliente/lista',[ClientesController::class, 'listaproducto']);  //Lista
+Route::get('cliente/lista',[ClientesController::class, 'listaproducto'])->middleware('auth'); //Lista
 
-Route::get('cliente/detalle/{Idproducto}', [ClientesController::class, 'detalle'])->name('clienteDet');
+Route::get('cliente/detalle/{Idproducto}', [ClientesController::class, 'detalle'])->name('clienteDet')->middleware('auth');
 
 
-Route::get('cliente/listar/{Idcategoria}', [ClientesController::class, 'listar'])->name('clienteLis');
+Route::get('cliente/listar/{Idcategoria}', [ClientesController::class, 'listar'])->name('clienteLis')->middleware('auth');
 
-Route::POST('cliente/buscar',[ClientesController::class, 'buscar'])->middleware('auth');
+Route::POST('cliente/buscar',[ClientesController::class, 'buscar'])->middleware('auth')->middleware('auth');
 
 Route::POST('cliente/item',[ClientesController::class, 'agregar'])->middleware('auth')->name('agregaritem');
 
@@ -138,4 +138,6 @@ Route::get('cliente/pago/{pro}/{fac}', [ClientesController::class, 'pagar'])->mi
 
 Route::get('cliente/fin/{fac}', [ClientesController::class, 'finalizar'])->middleware('auth')->name('fin');
 
-Route::get('cliente/factura',[ClientesController::class, 'facturalist']);  //Lista
+Route::get('cliente/factura',[ClientesController::class, 'facturalist'])->middleware('auth');  //Lista
+
+Route::get('cliente/detalles/{Idfacven}', [ClientesController::class, 'facdetalle'])->middleware('auth')->name('facvendetalle');

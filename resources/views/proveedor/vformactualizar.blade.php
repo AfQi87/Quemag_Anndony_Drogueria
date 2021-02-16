@@ -4,6 +4,7 @@
     <h1 class="text-center">Formulario de Actualizar Proveedor</h1>
 
     <div class="container">
+        @if($aux==0)
         <form action="{{route('actualizarProveedor', $proveedor->Idproveedor )}}" method="POST" >
             @csrf
             <br>
@@ -43,10 +44,15 @@
             <input type="hidden" class="form-control" name="estado" value="{{$proveedor->estadoprov}}"  aria-label="Username" aria-describedby="basic-addon1" >
 
             <br><br>
-            <button type="submit" class="btn btn-success" onclick="return alerta()">Actualizar</button>
+            <button type="submit" class="btn btn-success" onclick="return actualizar()">Actualizar</button>
             <a href="{{url('proveedor/lista')}}"  class="btn btn-info" >Cancelar</a>
             <br><br>
 
         </form>
+        @else
+            <h1>Los Datos Ingresados Ya Existen</h1>
+            <br>
+            <a href="{{url('proveedor/lista')}}"  class="btn btn-info" >Aceptar</a>
+        @endif
     </div>
 @stop

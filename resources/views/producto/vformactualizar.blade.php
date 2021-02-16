@@ -72,7 +72,7 @@
 
 
         <br><br>
-        <button type="submit" class="btn btn-success" onclick="return alerta()">Actualizar</button>
+        <button type="submit" class="btn btn-success" onclick="return actualizar()">Actualizar</button>
         <a href="{{url('producto/lista')}}"  class="btn btn-info" >Cancelar</a>
         <br><br>
 

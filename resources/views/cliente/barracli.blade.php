@@ -50,15 +50,10 @@
       @else
       <div style="margin-left: 300px;">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sesión
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            
-            <a class="dropdown-item" href="{{url('iniciar')}}">Iniciar</a>
-            <div class="dropdown-divider"></div>
-            
-          </div>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{url('iniciar')}}">Iniciar Sesión</a>
+        </li>
+          
       </li>
       </div>
       @endif

@@ -4,6 +4,7 @@
     <h1 class="text-center">Actualizar Usuario</h1>
 
     <div class="container">
+        
         <form action="{{route('actualizarUsuario', $usuario->id )}}" method="POST" >
             @csrf
             <br>
@@ -11,7 +12,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Id Usuario</span>
                 </div>
-                <input type="number" class="form-control" name="id" value="{{$usuario->id}}" aria-label="Username" aria-describedby="basic-addon1" required>
+                <input type="hidden" class="form-control" name="id" value="{{$usuario->id}}" aria-label="Username" aria-describedby="basic-addon1" >
+                <input type="number" class="form-control"  value="{{$usuario->id}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
             </div>
             <br>
             <div class="input-group mb-3">
@@ -25,7 +27,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Correo Usuario</span>
                 </div>
-                <input type="email" class="form-control" name="email" value="{{$usuario->email}}"  aria-label="Username" aria-describedby="basic-addon1" required>
+                <input type="hidden" class="form-control" name="email" value="{{$usuario->email}}"  aria-label="Username" aria-describedby="basic-addon1" >
+                <input type="email" class="form-control" value="{{$usuario->email}}"  aria-label="Username" aria-describedby="basic-addon1" disabled>
             </div> 
 
             <br>
@@ -56,10 +59,12 @@
             </div>       
             <input type="hidden" class="form-control" name="estado" value="{{$usuario->estadoUser}}"  aria-label="Username" aria-describedby="basic-addon1" >
             <br><br>
-            <button type="submit" class="btn btn-success" onclick="return alerta()">Actualizar</button>
+            <button type="submit" class="btn btn-success" onclick="return actualizar()">Actualizar</button>
             <a href="{{url('usuario/lista')}}"  class="btn btn-danger" >Cancelar</a>
             <br><br>
 
         </form>
+
+        
     </div>
 @stop

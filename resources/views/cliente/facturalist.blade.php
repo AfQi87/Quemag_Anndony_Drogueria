@@ -18,20 +18,20 @@
         </thead>
         <tbody class="table-info">
             @foreach($facturas as $p)
-            <tr>
-            <th scope="row">{{$p->Idfacven}}</th>
+                @if($p->estadofacv == 1)
+                    <tr>
+                        <th scope="row">{{$p->Idfacven}}</th>
+                        
+                        <td> {{$p->usuarios->name}}</td>
+                        <td> {{$p->Fechafacven}}</td>
+                        <td> ${{$p->Totalfacven}}</td>
+                        
+                        <td style="width: 130px;"> 
+                            <a href="{{route('facvendetalle', $p->Idfacven)}}"  class="btn btn-info" >&#10133;</a> 
+                        </td>
+                    </tr>
+                @endif
             
-            <td> {{$p->usuarios->name}}</td>
-            <td> {{$p->Fechafacven}}</td>
-            <td> ${{$p->Totalfacven}}</td>
-               
-            <td style="width: 130px;"> 
-                
-                
-                <a href="{{route('facdetalle', $p->Idfacven)}}"  class="btn btn-info" >&#10133;</a>
-                
-            </td>
-            </tr>
             @endforeach
         </tbody>
         

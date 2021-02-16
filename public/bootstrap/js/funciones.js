@@ -148,6 +148,29 @@ function alerta(){
 
 }
 
+function activar(){
+    if(confirm("Confirme Para Activar")){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function desactivar(){
+    if(confirm("Confirme Para Desactivar")){
+        return true;
+    }else{
+        return false;
+    }
+}
+function actualizar(){
+    if(confirm("Confirme Para Actualizar")){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function validar(){
     
     if(confirm("Confirme Para Registrar")){
