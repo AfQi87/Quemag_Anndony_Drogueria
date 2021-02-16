@@ -11,6 +11,7 @@ use App\Http\Controllers\FACTURA\FacturaController;
 use App\Http\Controllers\Categorias\CategoriaController;
 use App\Http\Controllers\Usuarios\UsuarioControlle;
 use App\Http\Controllers\Cliente\ClientesController;
+use App\Http\Controllers\Marcas\MarcaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -141,3 +142,19 @@ Route::get('cliente/fin/{fac}', [ClientesController::class, 'finalizar'])->middl
 Route::get('cliente/factura',[ClientesController::class, 'facturalist'])->middleware('auth');  //Lista
 
 Route::get('cliente/detalles/{Idfacven}', [ClientesController::class, 'facdetalle'])->middleware('auth')->name('facvendetalle');
+
+
+
+//Marcas
+Route::get('marca/formmarca',[MarcaController::class, 'formmarca'])->middleware('auth')->middleware(['admin']);//Lista
+Route::POST('marca/formmarca',[MarcaController::class, 'regmarca'])->middleware('auth')->middleware(['admin']);//Lista
+
+Route::get('marca/lista',[MarcaController::class, 'listamarca'])->middleware('auth')->middleware(['admin']);//lista
+
+Route::POST('marca/buscar',[MarcaController::class, 'buscar'])->middleware('auth')->middleware(['admin']);
+
+Route::get('marca/actualizar/{idmarca}', [MarcaController::class, 'formactualizar'])->name('actualizarMarc')->middleware('auth')->middleware(['admin']);
+Route::post('marca/actualizar/{idmarca}', [MarcaController::class, 'actualizar'])->name('actualizarMarca')->middleware('auth')->middleware(['admin']);
+
+Route::get('marca/eliminar/{idmarca}', [MarcaController::class, 'eliminar'])->name('eliminarMarca')->middleware(['admin']);
+Route::get('marca/activar/{idmarca}', [MarcaController::class, 'activar'])->name('activarMarca')->middleware(['admin']);

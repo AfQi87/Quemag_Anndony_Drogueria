@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 //Para hacer  posible  registro
 use App\Models\Mtipo;
-
+use App\Models\Mcategoria;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -41,18 +41,32 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+    
         $request->authenticate();
 
         $request->session()->regenerate();
-        if(Auth::user()->tipopro == 2){
-            return redirect('/dashboard');
-        }else{
-            if(Auth::user()->tipopro == 1){
+        if(Auth::user()->estadoUser == 1){
+            if(Auth::user()->tipopro == 2){
+                return redirect('/dashboard');
+            }else{
+                if(Auth::user()->tipopro == 1){
+                    
+                    return redirect('/');
+                }
                 
-                return redirect('/');
             }
-            
+        }else{
+            Auth::guard('web')->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+            $categorias=Mcategoria::all();
+            $aux=0;
+
+            return view('welcome', compact('categorias', 'aux'));
         }
+        
     }
 
     /**

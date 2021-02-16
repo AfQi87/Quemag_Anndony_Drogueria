@@ -4,7 +4,15 @@
     <h1 class="text-center">Formulario de Actualizar Proveedor</h1>
 
     <div class="container">
-        @if($aux==0)
+        
+        @if($aux == 1)
+            <?php 
+                echo "<script>
+                    alert('Los Datos Ingresados Ya Existen');
+                </script>";
+            ?>
+        @endif 
+
         <form action="{{route('actualizarProveedor', $proveedor->Idproveedor )}}" method="POST" >
             @csrf
             <br>
@@ -49,10 +57,6 @@
             <br><br>
 
         </form>
-        @else
-            <h1>Los Datos Ingresados Ya Existen</h1>
-            <br>
-            <a href="{{url('proveedor/lista')}}"  class="btn btn-info" >Aceptar</a>
-        @endif
+        
     </div>
 @stop

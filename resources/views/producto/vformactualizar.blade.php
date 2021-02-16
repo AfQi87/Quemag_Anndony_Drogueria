@@ -4,6 +4,14 @@
     <h1 class="text-center">Formulario de Actualización de producto</h1>
 
     <div class="container"> 
+    @if($aux == 1)
+            <?php 
+                echo "<script>
+                    alert('Los Datos Ingresados Ya Existen');
+                </script>";
+            ?>
+    @endif 
+
     <form action="{{route('actualizarProducto', $producto->Idproducto )}}" method="POST" >
         @csrf
         <br>

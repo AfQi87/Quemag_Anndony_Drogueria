@@ -23,7 +23,9 @@
                 <select class="custom-select" id="proveedor" name="proveedor" required>
                     <option value="" >Selecione un proveedor</option>
                     @foreach($proveedores as $c)
-                        <option value="{{$c->Idproveedor}}">{{$c->Nombreprove}}</option>
+                        @if($c->estadoprov == 1)
+                            <option value="{{$c->Idproveedor}}">{{$c->Nombreprove}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>

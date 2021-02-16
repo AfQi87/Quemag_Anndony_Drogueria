@@ -28,5 +28,8 @@ class Estado extends Model
     public function categoria(){
         return $this->hasMany(Mcategoria::class,'idestado');
     }
+    public function marca(){
+        return $this->hasMany(Marca::class,'idestado');
+    }
 
 }

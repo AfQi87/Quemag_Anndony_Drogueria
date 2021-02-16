@@ -25,7 +25,8 @@ class HomeController extends Controller
     {
         $i=0;
         $categorias=Mcategoria::all();
-        return view('welcome', compact('categorias'));
+        $aux=1;
+        return view('welcome', compact('categorias', 'aux'));
         
     }
 

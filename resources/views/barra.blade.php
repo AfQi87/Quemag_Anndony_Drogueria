@@ -31,6 +31,17 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Marcas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{url('marca/formmarca')}}">Registrar</a>
+          <a class="dropdown-item" href="{{url('marca/lista')}}">Listar</a>
+          <div class="dropdown-divider"></div>
+          
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Proveedores
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -64,7 +75,7 @@
         </div>
       </li>
 
-      <div style="margin-left: 900px;">
+      <div style="margin-left: 80%;">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ Auth::user()->name }}

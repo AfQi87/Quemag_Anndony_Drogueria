@@ -4,7 +4,14 @@
     <h1 class="text-center">Formulario de registro Proveedor</h1>
 
     <div class="container">
-    @if($aux==0)
+    
+        @if($aux == 1)
+            <?php 
+                echo "<script>
+                    alert('Los Datos Ingresados Ya Existen');
+                </script>";
+            ?>
+        @endif 
         <form action="{{url('proveedor/registro')}}" method="POST" >
             @csrf
            
@@ -52,27 +59,7 @@
             <br><br>
 
         </form>
-    @else
-        <h1>EL Proveedor Ya Existe</h1>
-        <br>
-        <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">ERROR</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Datos Ya Registrados</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-            </div>
-        </div>
-        </div>
-        <a href="{{url('proveedor/formregistro')}}"  class="btn btn-info" >Aceptar</a>
-    @endif
+    
         
     </div>
 @stop

@@ -9,8 +9,12 @@ class Marca extends Model
 {
     use HasFactory;
     protected $table='marca';
+    protected $primaryKey = 'idmarca';
 
     public function productos(){
         return $this->hasMany(Mproducto::class,'idmarca');
+    }
+    public function estados(){
+        return $this->belongsTo(Estado::class,'estadomarca','idestado');
     }
 }

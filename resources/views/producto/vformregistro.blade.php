@@ -4,6 +4,13 @@
     <h1 class="text-center">Registro de Productos</h1>
 
     <div class="container"> 
+        @if($aux == 1)
+                <?php 
+                    echo "<script>
+                        alert('Los Datos Ingresados Ya Existen');
+                    </script>";
+                ?>
+        @endif 
     <form action="{{url('producto/registro')}}" method="POST" >
         @csrf
         <br>
@@ -24,7 +31,9 @@
             <select class="custom-select" id="categoria" name="categoria" required>
                 <option value="" >Selecione una categoria</option>
                 @foreach($categorias as $c)
-                <option value="{{$c->Idcategoria}}">{{$c->nombrecat}}</option>
+                    @if($c->estadocat == 1)
+                        <option value="{{$c->Idcategoria}}">{{$c->nombrecat}}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
@@ -51,7 +60,10 @@
             <select class="custom-select" id="marcapro" name="marcapro" required>
                 <option value="" >Selecione una categoria</option>
                 @foreach($marcas as $c)
-                <option value="{{$c->idmarca}}">{{$c->descripcionmarca}}</option>
+                    @if($c->estadomarca == 1)
+                        <option value="{{$c->idmarca}}">{{$c->descripcionmarca}}</option>
+                    @endif
+                
                 @endforeach
             </select>
         </div>

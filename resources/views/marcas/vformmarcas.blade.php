@@ -1,9 +1,9 @@
 @extends('master')
 @section('contenido') 
     
-    <h1 class="text-center">Formulario de registro Categoria</h1>
+    <h1 class="text-center">Formulario de Marcas6ty </h1>
 
-    <div class="container">
+    <div class="container"> 
     @if($aux == 1)
             <?php 
                 echo "<script>
@@ -11,7 +11,7 @@
                 </script>";
             ?>
     @endif 
-    <form action="{{url('categoria/formcategoria')}}" method="POST" >
+    <form action="{{url('marca/formmarca')}}" method="POST" >
         @csrf
         <br>
         
@@ -23,7 +23,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Nombre</span>
             </div>
-            <input type="text" class="form-control" name="nombre" required placeholder="Nombre De Categoria" aria-label="Username" aria-describedby="basic-addon1" required>
+            <input type="text" class="form-control" name="nombre" required placeholder="Nombre Marca" aria-label="Username" aria-describedby="basic-addon1" required>
         </div>  
         <br>
 

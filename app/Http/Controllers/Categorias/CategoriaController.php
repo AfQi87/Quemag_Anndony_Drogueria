@@ -17,16 +17,31 @@ class CategoriaController extends Controller
 {
     //
     public function formcategoria(){
-        return view('categoria.vformcategoria');
+        $aux=0;
+        return view('categoria.vformcategoria', compact('aux'));
     }
     public function regcategoria(Request $request){
-        $producto = new Mcategoria();
-        $producto->Idcategoria = $request->input('idcategoria');
-        $producto->Nombrecat = $request->input('nombre');
-        $producto->estadocat = 1;
+        $cat=Mcategoria::all();
+        $cont=0;
+        foreach($cat as $c){
+            if($c->nombrecat == $request->input('nombre')){
+                $cont++;
+            }
+        }
 
-        $producto->save();
-        return redirect('categoria/lista');
+        if($cont>0){
+            $aux=1;
+            return view('categoria.vformcategoria', compact('aux'));
+        }else{
+            $categoria = new Mcategoria();
+        
+            $categoria->Nombrecat = $request->input('nombre');
+            $categoria->estadocat = 1;
+
+            $categoria->save();
+            return redirect('categoria/lista');
+        }
+        
     }
     public function listacategoria(){
       
@@ -44,27 +59,42 @@ class CategoriaController extends Controller
         return view('categoria.vlistacategoria', ['categorias' => $categorias]);        
     }
 
-    public function formactualizar($Idproducto){
-        $producto = Mproducto::findOrFail($Idproducto);
-
-        $categorias = Mcategoria::all();
-        $marcas = Marca::all();
-        return view('producto.vformactualizar', compact('producto','categorias','marcas'));
+    public function formactualizar($Idcategoria){
+        
+        
+        $categoria = Mcategoria::findOrFail($Idcategoria);
+        $aux=0;
+        return view('categoria.vformactualizar', compact('categoria','aux'));
         
     }
     public function actualizar(Request $request, $Idcategoria){
-        $producto = Mproducto::findOrFail($Idcategoria);
-        $producto->Idcat = $request->input('categoria');
-        $producto->Nombrepro = $request->input('nompro');
-        $producto->Descripcionpro = $request->input('descripcionpro');
-        $producto->Marcapro = $request->input('marcapro');
-        $producto->Cantidadpro = $request->input('cantidad');
-        $producto->Preciopro = $request->input('precio');
-        $producto->fotopro = $request->input('foto');
-        $producto->estadopro = $request->input('estado');
 
-        $producto->save();
-        return redirect('producto/lista');
+        $cat=Mcategoria::all();
+        $cont=0;
+
+        foreach($cat as $c){
+            if($c->Idcategoria != $Idcategoria){
+                if($c->nombrecat == $request->input('nombre')){
+                    $cont++;
+                }
+            }
+            
+        }
+
+        if($cont > 0){
+            $aux=1;
+            $categoria = Mcategoria::findOrFail($Idcategoria);
+       
+            return view('categoria.vformactualizar', compact('categoria', 'aux'));
+        }else{
+            $categoria = Mcategoria::findOrFail($Idcategoria);
+            $categoria->nombrecat = $request->input('nombre');
+        
+
+            $categoria->save();
+            return redirect('categoria/lista');
+        }
+        
         
     }
     public function eliminar($Idcategoria){
