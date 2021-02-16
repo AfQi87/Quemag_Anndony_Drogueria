@@ -27,7 +27,8 @@ class RegisteredUserController extends Controller
     {
         
         $tipos = DB::table('tipo')->first();
-        return view('auth.login', ['tipos' => $tipos]);
+        $aux=0;
+        return view('auth.login', compact('tipos', 'aux'));
        
     }
 
@@ -41,24 +42,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'id' => 'required|string|min:4',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:4',
-        ]);
-
-        Auth::login($user = User::create([
-            'id' => $request->id,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'tipopro'=> $request->tipopro,
-            'estadoUser' => 1,
-        ]));
-
-        event(new Registered($user));
-
-        return redirect(RouteServiceProvider::HOME);
+        $user = User::all();
+        $cont=0;
+        foreach($user as $u){
+            if($u->id == $request->input('id') || $u->email == $request->input('email')){
+                $cont++;
+            }
+        }
+        if($cont >0){
+            $aux=1;
+            $tipos = DB::table('tipo')->first();
+            return view('auth.login', compact('tipos', 'aux'));
+        }else{
+            Auth::login($user = User::create([
+                'id' => $request->id,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'tipopro'=> $request->tipopro,
+                'estadoUser' => 1,
+            ]));
+    
+            event(new Registered($user));
+    
+            return redirect(RouteServiceProvider::HOME);
+        }
+        
     }
 }

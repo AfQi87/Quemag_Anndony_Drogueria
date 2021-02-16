@@ -25,7 +25,15 @@
                         <div class="login-box">
                             <div class="login-snip"> <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Iniciar</label> <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Crear Cuenta</label>
                                 <div class="login-space">
+                                @if($aux == 1)
+                                    <?php 
+                                        echo "<script>
+                                            alert('El Id Ingresado Ya Existe');
+                                        </script>";
+                                    ?>
+                                @endif
                                     <form method="POST" action="{{ route('login') }}">
+                                        
                                         @csrf
                                         <div class="login">
                                             <div class="group"> <label for="email" class="label">Email</label> <input id="email" name="email"  type="email" class="input" placeholder="Escriba Su Correo" required> </div>

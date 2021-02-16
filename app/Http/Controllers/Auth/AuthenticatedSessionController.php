@@ -29,7 +29,8 @@ class AuthenticatedSessionController extends Controller
     public function create()
     {
         $tipos = DB::table('tipo')->first();
-        return view('auth.login', ['tipos' => $tipos]);
+        $aux=0;
+        return view('auth.login', compact('tipos', 'aux'));
         
     }
 

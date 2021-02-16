@@ -33,7 +33,8 @@ class HomeController extends Controller
     public function login()
     {
         $tipos = DB::table('tipo')->first();
-        return view('auth.login', ['tipos' => $tipos]);
+        $aux=0;
+        return view('auth.login', compact('tipos', 'aux'));
         
     }
 }
