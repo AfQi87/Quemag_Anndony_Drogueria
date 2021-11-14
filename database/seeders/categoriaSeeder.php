@@ -15,15 +15,17 @@ class categoriaSeeder extends Seeder
     public function run()
     {
         //
-        $categorias=[
+        $categorias = [
             //[
-              //  'NombreComoEstaEnLaTabla'=>'ValorQueQuieroAsignar'
+            //  'NombreComoEstaEnLaTabla'=>'ValorQueQuieroAsignar'
             // ],
-            ['Nombrecat'=>'Analgésicos'
+            ['nombrecat' => 'Analgésicos',
+                'estadocat' => '1',
             ],
-            ['Nombrecat'=>'Antialérgicos'
-            ]       
-           
+            ['nombrecat' => 'Antialérgicos',
+                'estadocat' => '1',
+            ],
+
         ];
         DB::table('categoria')->insert($categorias);
 

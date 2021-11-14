@@ -7,20 +7,14 @@
         <title>DrogueriaColombia</title>
 
         <!-- CARGA CSS -->
-        
-        
-        
         <link href="{{ url('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ url('/estilos.css') }}" rel="stylesheet"> 
         <link href="{{ url('/css/stilos.css') }}" rel="stylesheet"> 
         <!-- Fonts -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        
 
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-        
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     </head>
     <body class="antialiased" back>
         @include('cliente.barracli')
@@ -43,7 +37,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="{{ url('/bootstrap/js/funciones.js')}}"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
         
         
     </body>

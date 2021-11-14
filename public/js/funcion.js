@@ -30,3 +30,21 @@ jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</di
       });
     
 });
+
+$( document ).ready(function() {
+  $('.cnf-pro').confirm({
+    title: 'Error',
+    content: "Debe iniciar sesión",
+    buttons: {
+      'Iniciar Sesion': {
+        btnClass: 'btn btn-info',
+        action: function(){
+          location.href = this.$target.attr('href');
+        }
+      },
+      OK: {
+        btnClass: 'btn btn-danger',
+      }
+    }
+  });
+});

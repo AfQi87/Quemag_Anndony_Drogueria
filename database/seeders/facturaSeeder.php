@@ -19,13 +19,15 @@ class facturaSeeder extends Seeder
             //[
               //  'NombreComoEstaEnLaTabla'=>'ValorQueQuieroAsignar'
             // ],
-            ['Idprove'=>'1',
-             'Fechafac'=>'2020-01-01',
-             'Totalfac'=>'255000'
+            ['Idprove'=>'1234',
+             'Fechafac'=>'2021-11-01',
+             'Totalfac'=>'255000',
+             'estadofac'=>'1'
             ],
-            ['Idprove'=>'2',
-             'Fechafac'=>'2020-01-02',
-             'Totalfac'=>'290000'
+            ['Idprove'=>'4321',
+             'Fechafac'=>'2021-10-02',
+             'Totalfac'=>'290000',
+             'estadofac'=>'1'
             ]
             
            

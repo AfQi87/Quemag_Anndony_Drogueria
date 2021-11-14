@@ -121,7 +121,7 @@ Route::get('factura/detalle/{Idfactura}', [FacturaController::class, 'facdetalle
 
 ///===================================Clientes
 
-Route::get('cliente/lista',[ClientesController::class, 'listaproducto'])->middleware('auth'); //Lista
+Route::get('cliente/lista',[ClientesController::class, 'listaproducto']); //Lista
 
 Route::get('cliente/detalle/{Idproducto}', [ClientesController::class, 'detalle'])->name('clienteDet')->middleware('auth');
 

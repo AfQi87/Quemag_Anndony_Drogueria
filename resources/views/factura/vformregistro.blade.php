@@ -66,7 +66,8 @@
                         @foreach($productos as $p)
                         <tr>
                         <th scope="row">
-                            <input type="text" style="max-width: 100px;" value="{{$p->Idproducto}}" disabled>
+                            {{$p->Idproducto}}
+                            
                             <input type="hidden" style="max-width: 100px;" value="{{$p->Idproducto}}" name="idpro[]" id="idpro">
                         </th>
                         <td> {{$p->Nombrepro}}</td>

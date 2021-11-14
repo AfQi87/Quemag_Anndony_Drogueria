@@ -16,7 +16,7 @@ class MarcaController extends Controller
 {
     public function formmarca(){
         $aux=0;
-        return view('Marcas.vformmarcas', compact('aux'));
+        return view('marcas.vformmarcas', compact('aux'));
     }
 
     public function regmarca(Request $request){
@@ -29,7 +29,7 @@ class MarcaController extends Controller
         }
         if($cont>0){
             $aux=1;
-            return view('Marcas.vformmarcas', compact('aux'));
+            return view('marcas.vformmarcas', compact('aux'));
         }else{
             $marca = new Marca();
         
@@ -44,7 +44,7 @@ class MarcaController extends Controller
     public function listamarca(){
       
         $marca =Marca::all();
-        return view('Marcas.vlistamarca', ['marca' => $marca]);
+        return view('marcas.vlistamarca', ['marca' => $marca]);
         
     }
 
@@ -53,7 +53,7 @@ class MarcaController extends Controller
         
         $marca = Marca::findOrFail($idmarca);
         $aux=0;
-        return view('Marcas.vformactualizar', compact('marca','aux'));
+        return view('marcas.vformactualizar', compact('marca','aux'));
         
     }
     public function actualizar(Request $request, $idmarca){
@@ -74,7 +74,7 @@ class MarcaController extends Controller
             $aux=1;
             $marca = Marca::findOrFail($idmarca);
        
-            return view('Marcas.vformactualizar', compact('marca', 'aux'));
+            return view('marcas.vformactualizar', compact('marca', 'aux'));
         }else{
             $marca = Marca::findOrFail($idmarca);
             $marca->descripcionmarca = $request->input('nombre');

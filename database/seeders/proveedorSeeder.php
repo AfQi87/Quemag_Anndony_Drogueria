@@ -19,15 +19,19 @@ class proveedorSeeder extends Seeder
             //[
               //  'NombreComoEstaEnLaTabla'=>'ValorQueQuieroAsignar'
             // ],
-            ['Nombreprove'=>'Andres',
+            ['Idproveedor'=>'1234',
+             'Nombreprove'=>'Andres',
              'Direccionprove'=>'Pasto',
              'Correoprove'=>'andres@gmail.com',   
-             'Telefonoprove'=>'3101234567'            
+             'Telefonoprove'=>'3101234567',
+             'estadoprov'=>'1'            
             ],
-            ['Nombreprove'=>'Juan',
+            ['Idproveedor'=>'4321',
+             'Nombreprove'=>'Juan',
              'Direccionprove'=>'Cali',
              'Correoprove'=>'juan@gmail.com',   
-             'Telefonoprove'=>'3101234568'            
+             'Telefonoprove'=>'3101234568',
+             'estadoprov'=>'1'           
             ],
            
            
