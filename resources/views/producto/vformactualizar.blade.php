@@ -21,7 +21,7 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="categoria">Categorias</label>   
             </div>
-            <select class="custom-select" id="categoria" name="categoria" required>
+            <select class="form-select" id="categoria" name="categoria" required>
                 <option value="{{$producto->categorias->Idcategoria}}" selected="true" >{{$producto->categorias->nombrecat}} </option>
                 @foreach($categorias as $c)
                 <option value="{{$c->Idcategoria}}" >{{$c->nombrecat}}</option>
@@ -47,7 +47,7 @@
             <div class="input-group-prepend">
                 <label class="input-group-text" for="marcapro">Marca</label>   
             </div>
-            <select class="custom-select" id="marcapro" name="marcapro" required>
+            <select class="form-select" id="marcapro" name="marcapro" required>
                 <option value="{{$producto->marcas->idmarca}}" selected="true" >{{$producto->marcas->descripcionmarca}} </option>
                 @foreach($marcas as $c)
                 <option value="{{$c->idmarca}}" >{{$c->descripcionmarca}}</option>

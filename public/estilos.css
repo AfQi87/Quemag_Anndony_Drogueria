@@ -43,9 +43,8 @@ body {
   @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 
  body {
-     background: linear-gradient(0deg, #fff, 50%, #DEEEFE);
+     
      font-family: 'Rubik', sans-serif;
-     background: #455A64;
      
      width: 100%;
      overflow-x: hidden;

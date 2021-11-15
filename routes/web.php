@@ -128,7 +128,7 @@ Route::get('cliente/detalle/{Idproducto}', [ClientesController::class, 'detalle'
 
 Route::get('cliente/listar/{Idcategoria}', [ClientesController::class, 'listar'])->name('clienteLis')->middleware('auth');
 
-Route::POST('cliente/buscar',[ClientesController::class, 'buscar'])->middleware('auth')->middleware('auth');
+Route::POST('cliente/buscar',[ClientesController::class, 'buscar']);
 
 Route::POST('cliente/item',[ClientesController::class, 'agregar'])->middleware('auth')->name('agregaritem');
 

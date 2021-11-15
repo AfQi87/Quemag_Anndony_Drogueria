@@ -67,3 +67,39 @@ input[type=number]
   bottom: -1px;
   height: 50%;
 }
+
+.btn-datatables{
+  background-color: aqua;
+}
+
+.mover{
+  margin-left: 35%;
+  margin-top: -10%;
+  width: 500px;
+  background-color: rgb(110, 255, 243) !important;
+}
+
+.btn-registrar{
+  position: relative;
+  margin-left: 68%;
+  margin-bottom: -40px;
+  margin-top: 10px;
+}
+#example_wrapper{
+  margin-top: -10px;
+}
+.thead-dark{
+  color: #fff;
+  background-color: #343a40;
+  border-color: #454d55;
+}
+
+.btn-eliminar{
+  width: 60px;
+  height: 50px;
+  float: right;
+}
+
+.icon-eliminar{
+  font-size: 30px;
+}

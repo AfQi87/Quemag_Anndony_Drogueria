@@ -27,7 +27,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="proveedor">Proveedor</label>   
                 </div>
-                <select class="custom-select" id="proveedor" name="proveedor" required>
+                <select class="form-select" id="proveedor" name="proveedor" required>
                     <option value="" >Selecione un proveedor</option>
                     @foreach($proveedores as $c)
                         @if($c->estadoprov == 1)

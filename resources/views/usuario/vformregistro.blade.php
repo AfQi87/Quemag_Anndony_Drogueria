@@ -54,7 +54,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="tipopro">Tipo</label>   
                 </div>
-                <select class="custom-select" id="tipopro" name="tipopro" required>
+                <select class="form-select" id="tipopro" name="tipopro" required>
                     <option value="" >Selecione Tipo de Persona</option>
                     @foreach($tipos as $c)
                     <option value="{{$c->idtipo}}">{{$c->descripciontipo}}</option>

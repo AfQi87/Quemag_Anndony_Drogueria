@@ -1,7 +1,6 @@
 @extends('cliente.mastercli')
 @section('content')
 
-
 <div class="container">
   <br>
   <h1 class="text-center">Lista de producto</h1>
@@ -11,15 +10,14 @@
     <div class="input-group mb-3">
       <div style="margin-left:auto">
         <button type="button" class="btn btn-outline-secondary">Productos</button>
-        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="sr-only"></span>
         </button>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{{url('cliente/lista')}}" s>Todos</a>
           @foreach($categorias as $c)
-          <a class="dropdown-item" href="{{route('clienteLis', $c->Idcategoria)}}">{{$c->nombrecat}}</a>
+            <a class="dropdown-item" href="{{route('clienteLis', $c->Idcategoria)}}">{{$c->nombrecat}}</a>
           @endforeach
-
         </div>
       </div>
       <input type="text" style="margin-left: 650px; max-width: 200px;margin-right: 20px;" class="form-control" id="consultaPro" name="consultaPro" placeholder="Nombre Del Producto" aria-label="Username" aria-describedby="basic-addon1">
@@ -45,7 +43,7 @@
           <h2>Aún No agregas Productos</h2>
           @else
           @foreach($items as $p)
-          <a href="{{route('eliminarItem', ['pro'=>$p->productos->Idproducto, 'fac'=>$aux])}}" class="close">&#10060;</a>
+          <a href="{{route('eliminarItem', ['pro'=>$p->productos->Idproducto, 'fac'=>$aux])}}" class="close btn btn-outline-danger btn-eliminar"><i class="bi bi-cart-x icon-eliminar"></i></a>
           @php
           $foto=$p->productos->fotopro;
           @endphp
@@ -60,6 +58,7 @@
           <div class="alert alert-danger" role="alert" style="width: 180px;margin-left: 250px;">
             <h6 class="card-text">Precio: <b>${{$p->Precioitem}}</b> </h6>
           </div>
+          @if(Auth::user())
           <form action="{{route('agregaritem')}}" method="POST">
             @csrf
             <input type="hidden" name="lado" value="2">
@@ -77,8 +76,9 @@
             </div>
             <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
           </form>
+          @endif
 
-          <h6>===========================================</h6>
+          <h6>===================================================</h6>
           @endforeach
           <h5 class="card-text">Total: <b>{{$factura->Totalfacven}}</b> </h5>
 
@@ -117,12 +117,39 @@
             <p class="card-text">Precio: ${{$p->Preciopro}}</p>
           </div>
         </div>
-        <div class="card-footer bg-transparent" style="height: 70px;">
+        <div class="card-footer bg-transparent" style="height: 60px;">
 
-
-          <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#a{{$i}}">
-            Detalle
-          </button>
+          <div>
+            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#a{{$i}}">Detalle</button>
+            @if(Auth::user())
+            <div style="margin-left: 51%; margin-top: -15%">
+              <form action="{{route('agregaritem')}}" method="POST">
+                @csrf
+                <input type="hidden" name="lado" value="1">
+                <input type="hidden" name="car" value="{{$car}}">
+                <input type="hidden" name="fac" value="{{$aux}}">
+                <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="fecha" value='<?php echo date("Y-m-d"); ?>'>
+                <input type="hidden" name="producto" value="{{$p->Idproducto}}">
+                <input type="hidden" name="precio" value="{{$p->Preciopro}}">
+                <div class="quantity">
+                  <input type="number" min="1" max="{{$p->Cantidadpro}}" name="cantidad" step="1" value="1" required>
+                </div>
+                <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                  </svg>
+                </button>
+              </form>
+            </div>
+            @else
+            <a class="cnf-pro btn btn-outline-danger" href="{{url('iniciar')}}" style="float: right;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+              </svg>
+            </a>
+            @endif
+          </div>
 
           <!-- Modal -->
           <div class="modal fade" id="a{{$i}}" style="max-height: 1000px;overflow-y: scroll;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -148,25 +175,25 @@
                       </h6>
                 </div>
                 @if(Auth::user())
-                  <div class="modal-footer">
-                    <button type="button" style="margin-right: auto;" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <form action="{{route('agregaritem')}}" method="POST">
-                      @csrf
-                      <input type="hidden" name="lado" value="1">
-                      <input type="hidden" name="car" value="{{$car}}">
-                      <input type="hidden" name="fac" value="{{$aux}}">
-                      <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
-                      <input type="hidden" name="fecha" value='<?php echo date("Y-m-d"); ?>'>
-                      <input type="hidden" name="producto" value="{{$p->Idproducto}}">
-                      <input type="hidden" name="precio" value="{{$p->Preciopro}}">
-                      <div class="quantity">
-                        <input type="number" min="1" max="{{$p->Cantidadpro}}" style="margin-left: -100px;" name="cantidad" step="1" value="1" required>
-                      </div>
-                      <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
-                    </form>
-                  </div>
+                <div class="modal-footer">
+                  <button type="button" style="margin-right: auto;" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <form action="{{route('agregaritem')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="lado" value="1">
+                    <input type="hidden" name="car" value="{{$car}}">
+                    <input type="hidden" name="fac" value="{{$aux}}">
+                    <input type="hidden" name="usuario" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="fecha" value='<?php echo date("Y-m-d"); ?>'>
+                    <input type="hidden" name="producto" value="{{$p->Idproducto}}">
+                    <input type="hidden" name="precio" value="{{$p->Preciopro}}">
+                    <div class="quantity">
+                      <input type="number" min="1" max="{{$p->Cantidadpro}}" style="margin-left: -100px;" name="cantidad" step="1" value="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-outline-danger" style="margin-left: 5px;">Agregar Al Carrito</button>
+                  </form>
+                </div>
                 @else
-                  <a class="cnf-pro btn btn-outline-danger" href="{{url('iniciar')}}" style="margin: 30px">Agregar Al Carrito</a>
+                <a class="cnf-pro btn btn-outline-danger" href="{{url('iniciar')}}" style="margin: 30px">Agregar Al Carrito</a>
                 @endif
               </div>
             </div>
